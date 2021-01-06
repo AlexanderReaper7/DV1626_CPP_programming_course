@@ -152,8 +152,11 @@ För betyget G ska följande kriterier vara uppfyllda:
 * Ditt program ska gå att kompilera.
 * Ditt program ska passera alla testfall.
 * Din kod ska hålla hålla god struktur. Kör `make static-code-analysis` och se
-  till att du åtgärdat samtliga varningar och fel. CodeGrade kommer även köra
-  detta.
+  till att du åtgärdat de varningar och fel som du känner till och kan fixa
+  själv. Vissa varningar och fel har vi inte pratat om än och vissa är inte
+  aktuella för uppgiften. Jag kommmer gå igenom output från static-code-analysis
+  manuellt när ni lämnat in. Ni behöver inte ha noll varningar i
+  static-code-analysis för att få ett G.
 * Du skall ha använt en dubbelpekare med dynamiskt allokerat minne.
 * Minnet ska tas bort när det inte används. D.v.s Inga minnesläckor får
   förekomma. Kör `make memcheck` och säkerställ detta. CodeGrade kommer även
