@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5db33c19-a810-4b47-9cd2-39928aedf939" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../.vscode/c_cpp_properties.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/.vscode/c_cpp_properties.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/.vscode/launch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/.vscode/tasks.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/include/Book.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/include/Media.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/include/MediaManager.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/include/Ps2Game.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/include/Vinyl.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/main.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/Book.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/Book.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/MediaManager.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/MediaManager.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/Ps2Game.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/Ps2Game.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/Vinyl.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2-media-manager/src/Vinyl.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/vector.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/include/catch.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/tests-main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/include/Time.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/include/Time.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/src/PLACE_YOUR_SOURCE_FILES_HERE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/include/functionCheckerGenerators.inc" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/include/functionCheckerGenerators.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/include/magic.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/include/magic.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/include/printers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/include/printers.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/testBook.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/testBook.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/testMedia.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/testMedia.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/testMediaManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/testMediaManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/testPs2Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/testPs2Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2-media-manager/test/testVinyl.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2-media-manager/test/testVinyl.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment_1/.vs/ProjectSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment_1/.vs/ProjectSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment_1/.vs/VSWorkspaceState.json" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment_1/.vs/VSWorkspaceState.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment_1/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment_1/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment_1/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment_1/.vscode/settings.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="r91ud7rp" />
+  </component>
+  <component name="ProjectId" id="1mHnXxGwn9oZ3dvhhcd6GIGXOiL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5db33c19-a810-4b47-9cd2-39928aedf939" name="Default Changelist" comment="" />
+      <created>1609159427186</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1609159427186</updated>
+      <workItem from="1609159429669" duration="444000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="736" y="375" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609159694331">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="736" y="375" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1609159694331" />
+    <state x="1061" y="475" key="FileChooserDialogImpl" timestamp="1609159732673">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="1061" y="475" key="FileChooserDialogImpl/0.0.2560.1440@0.0.2560.1440" timestamp="1609159732673" />
+    <state x="782" y="365" key="SettingsEditor" timestamp="1609159539745">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="782" y="365" key="SettingsEditor/0.0.2560.1440@0.0.2560.1440" timestamp="1609159539745" />
+  </component>
+</project>
