@@ -24,18 +24,19 @@ TEMPLATE_TEST_CASE_SIG("Testing the Book class", "",                     //
         std::is_constructible<T_Book, const std::string&, const std::string&,
                               const std::string&, int, int>::value;
 
-    static constexpr bool hasOpEquals =
-        has_const_equalsOp<T_Book, bool, const T_Book&>::value;
-    HAS_CONST_FN(getTitle, T_Book, const std::string&);
+    static constexpr bool hasOpEquals = has_const_equalsOp<T_Book, bool, const T_Book&>::value;
+    static constexpr bool hasOpInEquals =
+        has_const_inEqualsOp<T_Book, bool, const T_Book&>::value;
+
     HAS_CONST_FN(getAuthor, T_Book, const std::string&);
     HAS_CONST_FN(getIsbn, T_Book, const std::string&);
     HAS_CONST_FN(getPages, T_Book, int);
     HAS_CONST_FN(getEdition, T_Book, int);
     HAS_CONST_FN(prettyPrint, T_Book, std::string);
     static constexpr bool signaturesOk =
-        hasOpEquals && var_has_getTitle && var_has_getIsbn &&
-        var_has_getPages && var_has_getEdition && var_has_prettyPrint &&
-        isBaseOfMedia && isPolymorphic && isConstructible;
+        hasOpEquals && hasOpInEquals && var_has_getIsbn && var_has_getPages &&
+        var_has_getEdition && var_has_prettyPrint && isBaseOfMedia &&
+        isPolymorphic && isConstructible;
 
     WHEN("Running signature tests on the Book class") {
       WHEN("Checking for polymorphism and correct base class") {
@@ -46,13 +47,13 @@ TEMPLATE_TEST_CASE_SIG("Testing the Book class", "",                     //
         CHECKVAR(isConstructible, "Checking Book constructor");
       }
       WHEN("Checking for correct getters") {
-        CHECKVAR2(getTitle);
         CHECKVAR2(getAuthor);
         CHECKVAR2(getIsbn);
         CHECKVAR2(getPages);
         CHECKVAR2(getEdition);
       }
       CHECKVAR(hasOpEquals, "operator==");
+      CHECKVAR(hasOpInEquals, "operator!=");
       CHECKVAR2(prettyPrint);
     }
 
@@ -87,6 +88,33 @@ TEMPLATE_TEST_CASE_SIG("Testing the Book class", "",                     //
                 T_Book fake("Fake", "FakePerson", "NaN", 43, 1338);
                 REQUIRE(tmp != fake);
               }
+            }
+          }
+        }
+      }
+      // Move to media? or another testfile?
+      WHEN("Testing equals and non-equals with polymorphism") {
+        GIVEN("Three books, original, a copy, and an another") {
+          T_Book orig("a", "b", "c", 1, 2);
+          T_Book copy("a", "b", "c", 1, 2);
+          T_Book another("d", "e", "f", 3, 4);
+          THEN("Check that orig can be compared to itself") {
+            REQUIRE(orig == orig);
+          }
+          THEN("Check that orig and copy are equal") { REQUIRE(orig == copy); }
+          THEN("Check that orig and copy does not equals 'another'") {
+            REQUIRE(orig != another);
+            REQUIRE(copy != another);
+          }
+          WHEN("They are stored as Media") {
+            T_Media* origM = &orig;
+            T_Media* copyM = &copy;
+            T_Media* anotherM = &another;
+            THEN("The comparisons should still hold true") {
+              REQUIRE(*origM == *origM);
+              REQUIRE(*origM == *copyM);
+              REQUIRE(*origM != *anotherM);
+              REQUIRE(*copyM != *anotherM);
             }
           }
         }

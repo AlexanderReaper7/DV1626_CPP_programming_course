@@ -11,6 +11,7 @@ mkdir -p fixture &&
 	cp fixture/makefile makefile &&
 	mkdir -p "test" &&
 	cp -r fixture/test/* test/
+
 prepResult=$?
 
 if [ $prepResult -ne 0 ]; then

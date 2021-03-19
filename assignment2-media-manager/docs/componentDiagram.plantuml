@@ -1,0 +1,44 @@
+@startuml
+!include https://raw.githubusercontent.com/future-architect/puml-themes/master/themes/puml-theme-vibrant.puml
+
+skinparam classAttributeIconSize 0
+
+package "Your app" {
+[app]
+}
+
+package "The tests" {
+[runtests]
+}
+
+package "Object files in the src-folder" as src {
+[YourUserInterface.o]
+[MediaManager.o]
+[Media.o]
+[Book.o]
+[Ps2Game.o]
+[Vinyl.o]
+[Track.o]
+[Time.o]
+}
+
+app *-- YourUserInterface.o
+app *-- MediaManager.o
+app *-- Media.o
+app *-- Book.o
+app *-- Ps2Game.o
+app *-- Vinyl.o
+app *-- Track.o
+app *-- Time.o
+
+runtests <.. YourUserInterface.o
+runtests <.. MediaManager.o
+runtests <.. Media.o
+runtests <.. Book.o
+runtests <.. Ps2Game.o
+runtests <.. Vinyl.o
+runtests <.. Track.o
+runtests <.. Time.o
+
+
+@enduml

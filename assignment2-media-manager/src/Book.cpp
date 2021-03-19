@@ -1,5 +1,5 @@
 #include "Book.hpp"
-
+#include <iostream>
 Book::Book(const std::string& title, const std::string& author, const std::string& isbn, int pages, int edition)
 {
     title_ = title;
@@ -8,14 +8,8 @@ Book::Book(const std::string& title, const std::string& author, const std::strin
     pages_ = pages;
     edition_ = edition;
 }
+Book::~Book() {}
 
-// Book::~Book()
-// {
-// }
-
-const std::string& Book::getTitle() const {
-    return title_;
-} 
 const std::string& Book::getAuthor() const {
     return author_;
 }
@@ -28,4 +22,19 @@ int Book::getPages() const {
 int Book::getEdition() const {
     return edition_;
 }
-// std::string Book::prettyPrint() const {}
+
+std::string Book::prettyPrint() const {
+    return "Book: " + title_ + ", " + author_ + ", " + isbn_  + ", " + std::to_string(pages_) + ", " + std::to_string(edition_);
+}
+
+bool Book::operator==(const Book& rhs) const {
+    return title_ == rhs.title_ &&
+        author_ == rhs.author_ &&
+        isbn_ == rhs.isbn_ &&
+        pages_ == rhs.pages_ &&
+        edition_ == rhs.edition_;
+}
+bool Book::operator!=(const Book& rhs) const {
+    return !(*this == rhs);
+}
+

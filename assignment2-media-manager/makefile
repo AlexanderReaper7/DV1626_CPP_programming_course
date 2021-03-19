@@ -1,11 +1,11 @@
 $(info +---------------------------------------------------------------------)
 ifdef FIXTURES
-  $(info | Environment detected AS CodeGrade)
+  $(info | Environment detected as CodeGrade)
   CC=clang-10
   CXX=clang-10
   MC_EXPORT="-fsanitize=address"
   ASAN_EXPORT="symbolize=0"
-  CFLAGS=-x c++ -c -Wall -Wpedantic -Werror -std=c++20 $(MC_FLAGS) $(INC_PARAMS) -O1
+  CFLAGS=-x c++ -c -Wall -Wpedantic -Werror -std=c++17 $(MC_FLAGS) $(INC_PARAMS) -O1
   LDFLAGS=-lstdc++ -lm -fuse-ld=lld $(MC_FLAGS)
   LINTER=clang-tidy-10
 else ifeq ($(shell uname -s),Linux)
@@ -14,8 +14,8 @@ else ifeq ($(shell uname -s),Linux)
   CC=clang-10
   CXX=clang-10
   MC_EXPORT="-fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls"
-  ASAN_EXPORT="symbolize=1 ASAN_SYMBOLIZER_PATH=$(shell which llvm-symbolizer)"
-  CFLAGS=-x c++ -c -Wall  -Wpedantic -Werror -std=c++20 $(MC_FLAGS) $(INC_PARAMS) -g -D_GLIBCXX_DEBUG -O0 -fno-elide-constructors
+  ASAN_EXPORT="symbolize=1  ASAN_OPTIONS=fast_unwind_on_malloc=0 ASAN_SYMBOLIZER_PATH=$(shell which llvm-symbolizer)"
+  CFLAGS=-x c++ -c -Wall  -Wpedantic -Werror -std=c++17 -fno-elide-constructors -fno-inline $(MC_FLAGS) $(INC_PARAMS) -g -D_GLIBCXX_DEBUG -O0
   LDFLAGS=-lstdc++ -lm $(MC_FLAGS)
   LINTER=clang-tidy
 else
@@ -24,8 +24,8 @@ else
   CC=/usr/local/opt/llvm/bin/clang
   CXX=/usr/local/opt/llvm/bin/clang
   MC_EXPORT="-fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls"
-  ASAN_EXPORT="symbolize=1 ASAN_SYMBOLIZER_PATH=$(shell which llvm-symbolizer)"
-  CFLAGS=-x c++ -c -Wall  -Wpedantic -Werror -std=c++20 $(MC_FLAGS) $(INC_PARAMS) -g -D_GLIBCXX_DEBUG -O0 -fno-elide-constructors
+  ASAN_EXPORT="symbolize=1 ASAN_OPTIONS=fast_unwind_on_malloc=0 ASAN_SYMBOLIZER_PATH=$(shell which llvm-symbolizer)"
+  CFLAGS=-x c++ -c -Wall  -Wpedantic -Werror -std=c++17 $(MC_FLAGS) $(INC_PARAMS) -g -D_GLIBCXX_DEBUG -O0 -fno-elide-constructors
   LDFLAGS=-lstdc++ -lm $(MC_FLAGS)
   LINTER=clang-tidy
 endif
@@ -68,6 +68,7 @@ $(APP_EXECUTABLE): $(APP_OBJECTS) $(OBJECTS)
 
 .PHONY: clean
 clean:
+	-rm -f automated-mattias
 	-rm -f $(APP_EXECUTABLE)
 	-rm -f $(TEST_EXECUTABLE)
 	-rm -f $(ZIP_FILE)*.zip
@@ -101,21 +102,4 @@ zip:
 	${MAKE} $(ZIP_FILE)
 
 $(ZIP_FILE):
-	zip -r $(ZIP_FILE)-${shell git describe}.zip . -x '*.git*' -x '*.zip'
-
-RED=\033[0;31m
-GREEN=\033[0;32m
-NC=\033[0m
-TMP_CHECK_NOT_OK=FAIL! Replace the test file with the one from the instructions!
-TMP_CHECK_OK=PASS!
-.PHONY: check-tampering
-check-tampering:
-	@echo "Checking for tampering"
-	@sha1sum 'test/tests-main.cpp' | grep -q '464ee9dbd4705e79ad15a772ffd2dc065ff6f33a'; \
-		if [ $$? -eq 0 ]; then \
-			echo "${GREEN}$(TMP_CHECK_OK)${NC}";\
-			exit 0;\
-		else \
-			echo "${RED}$(TMP_CHECK_NOT_OK)${NC}";\
-			exit 1;\
-		fi
+	zip -r $(ZIP_FILE)-${shell git branch --show-current}-${shell git describe}.zip . -x '*.git*' -x '*.zip' -x 'out/*' -x '*.html'

@@ -8,15 +8,17 @@
 #include <functional>
 #include <type_traits>
 
-#define CHECKVAR(is, what)                                                  \
-  THEN("Checking: " #what) {                                                \
-    if (is) {                                                               \
-      SUCCEED("OK!");                                                       \
-    } else {                                                                \
-      FAIL_CHECK(#what                                                      \
-                 " is false, is wrong, is missing, or is having the wrong " \
-                 "signature!");                                             \
-    }                                                                       \
+#define CHECKVAR(is, what)                                               \
+  THEN("Checking: " #what) {                                             \
+    if (is) {                                                            \
+      SUCCEED("OK!");                                                    \
+    } else {                                                             \
+      FAIL_CHECK(                                                        \
+          #what                                                          \
+          " is false, is wrong, is missing, or is having the wrong "     \
+          "signature! If a function should be marked const and is not, " \
+          "you may get this error");                                     \
+    }                                                                    \
   }
 
 #define CHECKVAR2(what)                                                    \
@@ -24,7 +26,10 @@
     if (var_has_##what) {                                                  \
       SUCCEED("OK!");                                                      \
     } else {                                                               \
-      FAIL_CHECK(#what "() is missing or is having the wrong signature!"); \
+      FAIL_CHECK(                                                          \
+          #what                                                            \
+          "() is missing or is having the wrong signature! If a function " \
+          "should be marked const and is not, you may get this error");    \
     }                                                                      \
   }
 

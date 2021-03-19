@@ -42,7 +42,9 @@ TEMPLATE_TEST_CASE_SIG("Testing the Vinyl class", "",  //
     static constexpr bool hasOpEquals =
         has_const_equalsOp<T_Vinyl, bool, const T_Vinyl&>::value;
 
-    HAS_CONST_FN(getTitle, T_Vinyl, const std::string&);
+    static constexpr bool hasOpInEquals =
+        has_const_inEqualsOp<T_Vinyl, bool, const T_Vinyl&>::value;
+
     HAS_CONST_FN(getYear, T_Vinyl, int);
     HAS_CONST_FN(getArtist, T_Vinyl, const std::string&);
     HAS_CONST_FN(getType, T_Vinyl, T_VinylTypes);
@@ -53,7 +55,7 @@ TEMPLATE_TEST_CASE_SIG("Testing the Vinyl class", "",  //
 
     static constexpr bool signaturesOk =
         vinylConstructible && trackConstructible && hasOpEquals &&
-        var_has_getTitle && var_has_getYear && var_has_getArtist &&
+        hasOpInEquals && var_has_getYear && var_has_getArtist &&
         var_has_getType && var_has_getRuntime && var_has_getTracks &&
         var_has_addTrack && var_has_prettyPrint && isBaseOfMedia &&
         isPolymorphic;
@@ -67,7 +69,6 @@ TEMPLATE_TEST_CASE_SIG("Testing the Vinyl class", "",  //
         CHECKVAR(trackConstructible, "Checking Track constructor");
       }
       WHEN("Checking for correct getters") {
-        CHECKVAR2(getTitle);
         CHECKVAR2(getYear);
         CHECKVAR2(getType);
         CHECKVAR2(getArtist);
@@ -75,6 +76,7 @@ TEMPLATE_TEST_CASE_SIG("Testing the Vinyl class", "",  //
         CHECKVAR2(getTracks)
       }
       CHECKVAR(hasOpEquals, "operator==");
+      CHECKVAR(hasOpInEquals, "operator!=");
       CHECKVAR2(prettyPrint);
       CHECKVAR2(addTrack);
     }
@@ -83,8 +85,7 @@ TEMPLATE_TEST_CASE_SIG("Testing the Vinyl class", "",  //
       if constexpr (!signaturesOk) {
         FAIL(
             "Skipping this section as the class does not conform to the "
-            "spec. "
-            "Make sure you have implented all methods with the correct "
+            "spec. Make sure you have implented all methods with the correct "
             "signatures. The tests above should guide you and show you what "
             "is actually missing or wrong ");
       } else {
@@ -137,6 +138,90 @@ TEMPLATE_TEST_CASE_SIG("Testing the Vinyl class", "",  //
               AND_THEN("And so should the != operator") {
                 kramgoaSevenCopy.addTrack(T_Track("fejk", Time(43s)));
                 REQUIRE(kramgoaSevenCopy != kramgoaSeven);
+              }
+            }
+          }
+        }
+        WHEN("Extended testing of equals and non-equals") {
+          GIVEN("Vinyls with no tracks") {
+            T_Vinyl orig("a", T_VinylTypes::LONG_PLAY, 1, "b", Time(46min));
+            T_Vinyl copy(orig);
+            T_Vinyl another("c", T_VinylTypes::LONG_PLAY, 2, "d", Time(47min));
+            THEN("Check that orig and copy are equal") {
+              REQUIRE(orig == copy);
+            }
+            THEN("Check that orig and copy does not equals 'another'") {
+              REQUIRE(orig != another);
+              REQUIRE(copy != another);
+            }
+            WHEN("They are stored as Media") {
+              T_Media* origM = &orig;
+              T_Media* copyM = &copy;
+              T_Media* anotherM = &another;
+              THEN("The comparisons should still hold true") {
+                REQUIRE(*origM == *copyM);
+                REQUIRE(*origM != *anotherM);
+                REQUIRE(*copyM != *anotherM);
+              }
+            }
+          }
+          GIVEN("Identical vinyls with different tracks") {
+            T_Vinyl orig("a", T_VinylTypes::LONG_PLAY, 1, "b", Time(46min));
+            orig.addTrack(T_Track("aa", Time(3min + 3s)));
+            orig.addTrack(T_Track("bb", Time(2min + 23s)));
+            orig.addTrack(T_Track("cc", Time(3min + 14s)));
+            T_Vinyl copy(orig);
+            T_Vinyl another("a", T_VinylTypes::LONG_PLAY, 1, "b", Time(46min));
+            another.addTrack(T_Track("dd", Time(4min + 4s)));
+            another.addTrack(T_Track("ee", Time(5min + 5s)));
+            another.addTrack(T_Track("ff", Time(6min + 6s)));
+            THEN("Check that orig and copy are equal") {
+              REQUIRE(orig == copy);
+            }
+            THEN("Check that orig and copy does not equals 'another'") {
+              REQUIRE(orig != another);
+              REQUIRE(copy != another);
+            }
+            WHEN("They are stored as Media") {
+              T_Media* origM = &orig;
+              T_Media* copyM = &copy;
+              T_Media* anotherM = &another;
+              THEN("The comparisons should still hold true") {
+                REQUIRE(*origM == *copyM);
+                REQUIRE(*origM != *anotherM);
+                REQUIRE(*copyM != *anotherM);
+              }
+            }
+          }
+          GIVEN("Different vinyls with identical tracks") {
+            T_Vinyl orig("a", T_VinylTypes::LONG_PLAY, 1, "b", Time(46min));
+            orig.addTrack(T_Track("aa", Time(3min + 3s)));
+            orig.addTrack(T_Track("bb", Time(2min + 23s)));
+            orig.addTrack(T_Track("cc", Time(3min + 14s)));
+            T_Vinyl copy(orig);
+            T_Vinyl another("c", T_VinylTypes::LONG_PLAY, 1, "d", Time(47min));
+            another.addTrack(T_Track("aa", Time(3min + 3s)));
+            another.addTrack(T_Track("bb", Time(2min + 23s)));
+            another.addTrack(T_Track("cc", Time(3min + 14s)));
+            THEN("Check that orig can be compared to itself") {
+              REQUIRE(orig == orig);
+            }
+            THEN("Check that orig and copy are equal") {
+              REQUIRE(orig == copy);
+            }
+            THEN("Check that orig and copy does not equals 'another'") {
+              REQUIRE(orig != another);
+              REQUIRE(copy != another);
+            }
+            WHEN("They are stored as Media") {
+              T_Media* origM = &orig;
+              T_Media* copyM = &copy;
+              T_Media* anotherM = &another;
+              THEN("The comparisons should still hold true") {
+                REQUIRE(*origM == *origM);
+                REQUIRE(*origM == *copyM);
+                REQUIRE(*origM != *anotherM);
+                REQUIRE(*copyM != *anotherM);
               }
             }
           }

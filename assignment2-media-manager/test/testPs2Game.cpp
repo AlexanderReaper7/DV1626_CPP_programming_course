@@ -26,12 +26,14 @@ TEMPLATE_TEST_CASE_SIG("Testing the Ps2Game class", "",                     //
 
     static constexpr bool hasOpEquals =
         has_const_equalsOp<T_Ps2Game, bool, const T_Ps2Game&>::value;
-    HAS_CONST_FN(getTitle, T_Ps2Game, const std::string&);
+    static constexpr bool hasOpInEquals =
+        has_const_inEqualsOp<T_Ps2Game, bool, const T_Ps2Game&>::value;
+
     HAS_CONST_FN(getStudio, T_Ps2Game, const std::string&);
     HAS_CONST_FN(getYear, T_Ps2Game, int);
     HAS_CONST_FN(prettyPrint, T_Ps2Game, std::string);
 
-    static constexpr bool signaturesOk = hasOpEquals && var_has_getTitle &&
+    static constexpr bool signaturesOk = hasOpEquals && hasOpInEquals &&
                                          var_has_getStudio && var_has_getYear &&
                                          var_has_prettyPrint && isBaseOfMedia &&
                                          isPolymorphic && isConstructible;
@@ -44,11 +46,11 @@ TEMPLATE_TEST_CASE_SIG("Testing the Ps2Game class", "",                     //
         CHECKVAR(isConstructible, "Checking Ps2Game constructor");
       }
       WHEN("Checking for correct getters") {
-        CHECKVAR2(getTitle);
         CHECKVAR2(getStudio);
         CHECKVAR2(getYear);
       }
       CHECKVAR(hasOpEquals, "operator==");
+      CHECKVAR(hasOpInEquals, "operator!=");
       CHECKVAR2(prettyPrint);
     }
 
@@ -62,7 +64,7 @@ TEMPLATE_TEST_CASE_SIG("Testing the Ps2Game class", "",                     //
             "is actually missing or wrong ");
       } else {
         GIVEN("Two games") {
-          T_Ps2Game bfbc2(T_Ps2Game("Battlefield Bad Company 2", "DICE", 2010));
+          T_Ps2Game bfbc2("Battlefield Bad Company 2", "DICE", 2010);
           T_Ps2Game tmp(bfbc2);
           THEN("Getters should return expected values") {
             REQUIRE(tmp.getTitle() == "Battlefield Bad Company 2");
@@ -79,6 +81,36 @@ TEMPLATE_TEST_CASE_SIG("Testing the Ps2Game class", "",                     //
             AND_THEN("And so should the != operator") {
               T_Ps2Game bf4(T_Ps2Game("Battlefield 4", "DICE", 2013));
               REQUIRE(bf4 != bfbc2);
+            }
+          }
+        }
+        // Move to media? or another testfile?
+        WHEN("Testing equals and non-equals with polymorphism") {
+          GIVEN("Three Games, original, a copy, and an another") {
+            T_Ps2Game orig("a", "b", 1);
+            T_Ps2Game copy("a", "b", 1);
+            T_Ps2Game another("d", "d", 2);
+
+            THEN("Check that orig can be compared to itself") {
+              REQUIRE(orig == orig);
+            }
+            THEN("Check that orig and copy are equal") {
+              REQUIRE(orig == copy);
+            }
+            THEN("Check that orig and copy does not equals 'another'") {
+              REQUIRE(orig != another);
+              REQUIRE(copy != another);
+            }
+            WHEN("They are stored as Media") {
+              T_Media* origM = &orig;
+              T_Media* copyM = &copy;
+              T_Media* anotherM = &another;
+              THEN("The comparisons should still hold true") {
+                REQUIRE(*origM == *origM);
+                REQUIRE(*origM == *copyM);
+                REQUIRE(*origM != *anotherM);
+                REQUIRE(*copyM != *anotherM);
+              }
             }
           }
         }

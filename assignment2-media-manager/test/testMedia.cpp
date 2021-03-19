@@ -21,14 +21,21 @@ TEMPLATE_TEST_CASE_SIG("Testing the Book class", "",    //
 
     static constexpr bool hasOpEquals =
         has_const_equalsOp<T_Media, bool, const T_Media&>::value;
+    static constexpr bool hasOpInEquals =
+        has_const_inEqualsOp<T_Media, bool, const T_Media&>::value;
     HAS_CONST_FN(prettyPrint, T_Media, std::string);
+    HAS_CONST_FN(getTitle, T_Media, const std::string&);
 
     WHEN("Running signature tests on the Media class") {
       WHEN("Checking for polymorphism and correct base class") {
         CHECKVAR(isAbstract, "Media is abstract");
         CHECKVAR(isPolymorphic, "Polymorphism");
       }
+      WHEN("Checking for correct getters") {
+        CHECKVAR2(getTitle);
+      }
       CHECKVAR(hasOpEquals, "operator==");
+      CHECKVAR(hasOpInEquals, "operator!=");
       CHECKVAR2(prettyPrint);
     }
   }

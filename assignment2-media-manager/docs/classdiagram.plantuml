@@ -1,0 +1,52 @@
+@startuml
+'!includeurl https://raw.githubusercontent.com/matthewjosephtaylor/plantuml-style/master/style.pu'
+!include https://raw.githubusercontent.com/future-architect/puml-themes/master/themes/puml-theme-vibrant.puml
+
+skinparam classAttributeIconSize 0
+
+class MediaManager #LightGreen
+abstract class Media #LightGreen
+class Book #LightGreen
+class Vinyl #LightGreen
+class Ps2Game #LightGreen
+class Track #LightGreen
+enum VinylTypes #LightGreen
+
+class Time
+
+Media <|-- Book
+Media <|-- Ps2Game
+Media <|-- Vinyl
+Vinyl *-- VinylTypes
+Vinyl *-- Track
+Track *-- Time
+
+MediaManager *-- Media
+
+package "Ditt användargränssnitt" <<Cloud>> #LightGreen {
+note "main.cpp" as N1
+}
+
+"Ditt användargränssnitt" *-- MediaManager
+
+package "Test suite" <<Cloud>> #DDDDDD {
+    note "tests-main.cpp" as N2
+}
+    "Test suite" <.. MediaManager
+    "Test suite" <.. Book
+    "Test suite" <.. Vinyl
+    "Test suite" <.. Track
+    "Test suite" <.. Ps2Game
+
+note left of VinylTypes #LightGreen
+    De ljusgröna klasserna
+    i diagrammet ska du
+    implementera själv
+end note
+
+note left of Time #LightYellow
+    De ljusgula klasserna i
+    diagrammet följer med
+end note
+
+@enduml
